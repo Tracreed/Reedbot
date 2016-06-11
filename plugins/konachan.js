@@ -2,7 +2,6 @@ var request = require('request');
 var commands = require('../bot.js').commands;
 var bot = require('../bot.js').bot;
 var db = require('../bot.js').db;
-var url_shortener_key = "";
 var cheerio = require('cheerio');
 var previous_pics = [];
 
@@ -32,7 +31,7 @@ commands.on('konachan', function(user, userID, channelID, message) {
                             previous_pics.shift();
                         }
                         var options = {
-                            url:"https://www.googleapis.com/urlshortener/v1/url?key=" + url_shortener_key,
+                            url:"https://www.googleapis.com/urlshortener/v1/url?key=" + db.settings.url_shortener_key,
                             json:true,
                             body:{
                                 "longUrl":data[index].jpeg_url
