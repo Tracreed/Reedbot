@@ -4,13 +4,12 @@ require("babel-register");
 var db = require('./db.json');
 var bot = new DiscordClient({
     autorun: true,
-    token: ""
+    token: db.settings.token
 });
 var fs = require('fs');
 var parseArgs = require('minimist');
 var events = require('events');
 var commands = new events.EventEmitter();
-var owner = "";
 
 fs.readdir('./plugins/', function(err, files) {
     if (err) throw err;
@@ -44,7 +43,7 @@ commands.on('eval', function(user, userID, channelID, message) {
     var code = message.replace(`${db.settings.prefix}eval `, '');
     console.log(code, userID);
     try {
-        if (userID === owner) {
+        if (userID === db.settings.owner) {
             bot.sendMessage({
                 to:channelID,
                 message: eval(code)
@@ -59,7 +58,7 @@ commands.on('eval', function(user, userID, channelID, message) {
 });
 
 commands.on('shutdown', function roll(user, userID, channelID, message, args) {
-    if (userID === owner) {
+    if (userID === db.settings.owner) {
         fs.writeFile('db.json', JSON.stringify(db, null, 4), 'utf8', function(err) {
             if (err) console.error(err);
             process.exit(0);

@@ -4,7 +4,7 @@ var fs = require('fs');
 var request = require('request');
 var probe = require('node-ffprobe');
 var osuapi = require('osu-api');
-var osu = new osuapi.Api('');
+var osu = new osuapi.Api(db.settings.osu_api_key);
 var numeral = require('numeral');
 var commands = require('../bot.js').commands;
 var bot = require('../bot.js').bot;
@@ -420,8 +420,8 @@ function getMap(message, channelID, user, userID, cmd) {
 							});
 							var formData = {
 								login: 'login',
-								password: db.osu_password,
-								username: db.osu_username
+								password: db.settings.osu_password,
+								username: db.settings.osu_username
 							};
 							request.post({
 								url: "https://osu.ppy.sh/forum/ucp.php?mode=login",

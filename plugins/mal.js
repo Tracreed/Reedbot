@@ -1,19 +1,18 @@
 var malApi = "http://myanimelist.net/api/";
 var malUrl = "http://myanimelist.net";
-var mal_user = "";
-var mal_pass = "";
 var xmlParser = require('xml2json');
 var cheerio = require('cheerio');
 var request = require('request');
 var commands = require('../bot.js').commands;
 var bot = require('../bot.js').bot;
+var db = require('../bot.js').db;
 
 commands.on('anime', function(user, userID, channelID, message, args) {
     var title = args._.join('+');
     request.get(`${malApi}anime/search.xml?q=${title}`, {
         'auth': {
-            'user': mal_user,
-            'pass': mal_pass
+            'user': db.settings.mal_user,
+            'pass': db.settings.mal_pass
         }
     }, function(error, response, body) {
         if (!error && response.statusCode == 200) {

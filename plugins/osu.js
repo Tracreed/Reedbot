@@ -2,7 +2,7 @@ var commands = require('../bot.js').commands;
 var bot = require('../bot.js').bot;
 var db = require('../bot.js').db;
 var osuapi = require('osu-api');
-var osu = new osuapi.Api('');
+var osu = new osuapi.Api(db.settings.osu_api_key);
 var numeral = require('numeral');
 var moment = require('moment-timezone');
 
