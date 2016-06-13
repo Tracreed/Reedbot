@@ -60,7 +60,7 @@ commands.on('stats', function(user, userID, channelID, message, args) {
     }
     bot.sendMessage({
         to:channelID,
-        message: `Uptime: ${uptime} \n${commandsString}${messagesRecieved} messages have been recieved\nMemory usage is ${numeral(process.memoryUsage().heapUsed).format('0 b')}`
+        message: `Uptime: ${uptime} \n${commandsString}${messagesRecieved} messages have been received\nI'm in ${Object.keys(bot.servers).length} servers\nMemory usage is ${numeral(process.memoryUsage().heapUsed).format('0 b')}`
     });
 });
 

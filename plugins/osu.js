@@ -7,7 +7,7 @@ var numeral = require('numeral');
 var moment = require('moment-timezone');
 
 commands.on('osu', function(user, userID, channelID, message, args) {
-    console.log(args);
+    osu.setMode('0');
     var osu_name;
     if (args._.length && args._[0].length > 0) {
         osu_name = args._.join(' ').toLowerCase();

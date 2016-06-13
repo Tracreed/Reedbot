@@ -28,6 +28,8 @@ bot.on('message', function(user, userID, channelID, message, rawEvent) {
     //console.log(channelID, message);
     var args = parseArgs(message.replace(new RegExp(`\\${db.settings.prefix}\\S+([\\s]|)`), '').split(' '));
     var tmp = message.replace(new RegExp(`\\${db.settings.prefix}(\\w*)((.|\\n)*|)`), "$1");
+    if (userID === bot.id) return;
+    if (bot.users[userID].bot) return;
     if (message.substr(0, db.settings.prefix.length) === db.settings.prefix) {
         console.log(`${user} - ${userID} ${tmp}`);
         console.log(args);

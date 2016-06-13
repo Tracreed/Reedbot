@@ -3,12 +3,12 @@ var unzip = require('unzip');
 var fs = require('fs');
 var request = require('request');
 var probe = require('node-ffprobe');
-var osuapi = require('osu-api');
-var osu = new osuapi.Api(db.settings.osu_api_key);
 var numeral = require('numeral');
 var commands = require('../bot.js').commands;
 var bot = require('../bot.js').bot;
 var db = require('../bot.js').db;
+var osuapi = require('osu-api');
+var osu = new osuapi.Api(db.settings.osu_api_key);
 
 var userObj = {
 	faves: []

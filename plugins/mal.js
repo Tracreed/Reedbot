@@ -9,12 +9,7 @@ var db = require('../bot.js').db;
 
 commands.on('anime', function(user, userID, channelID, message, args) {
     var title = args._.join('+');
-    request.get(`${malApi}anime/search.xml?q=${title}`, {
-        'auth': {
-            'user': db.settings.mal_user,
-            'pass': db.settings.mal_pass
-        }
-    }, function(error, response, body) {
+    request.get(`${malApi}anime/search.xml?q=${title}`, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             var result = JSON.parse(xmlParser.toJson(body, {
                 sanitize: false
