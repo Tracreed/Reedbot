@@ -24,10 +24,16 @@ bot.on('ready', function() {
     console.log(bot.username + " - (" + bot.id + ")");
 });
 
+setInterval(function saveDB () {
+    fs.writeFile('db.json', JSON.stringify(db, null, 4), 'utf8', function(err) {
+        if (err) return;
+    });
+}, 3600000);
+
 bot.on('message', function(user, userID, channelID, message, rawEvent) {
     //console.log(channelID, message);
     var args = parseArgs(message.replace(new RegExp(`\\${db.settings.prefix}\\S+([\\s]|)`), '').split(' '));
-    var tmp = message.replace(new RegExp(`\\${db.settings.prefix}(\\w*)((.|\\n)*|)`), "$1");
+    var tmp = message.replace(new RegExp(`\\${db.settings.prefix}([^\\s]*)((.|\\n)*|)`), "$1");
     if (userID === bot.id) return;
     if (bot.users[userID].bot) return;
     if (message.substr(0, db.settings.prefix.length) === db.settings.prefix) {
