@@ -21,19 +21,19 @@ var messagesRecieved = 0;
 
 bot.on('message', function(user, userID, channelID, message, rawEvent) {
     db.stats[userID] = Object.assign({}, defUser, db.stats[userID], bot.users[userID]);
-    var newUserNameIndex = db.stats[userID].usernames.findIndex(function(element, index, arr) {
+    /*var newUserNameIndex = db.stats[userID].usernames.findIndex(function(element, index, arr) {
         return db.stats[userID].usernames[index] === bot.users[userID].username;
     });
     if (newUserNameIndex === -1) {
         db.stats[userID].usernames.push(bot.users[userID].username);
-    } 
+    }*/ 
     var tmp = message.replace(new RegExp(`\\${db.settings.prefix}(\\w*)(\\s.*|)`), "$1");
     messagesRecieved++;
     db.stats[userID].lastMessage = message;
-    db.stats[userID].messages.push(message);
+    /*db.stats[userID].messages.push(message);
     if (db.stats[userID].messages.length > 100) {
         db.stats[userID].messages.shift();
-    }
+    }*/
     db.stats[userID].messagesSent++;
     if (message.substr(0, db.settings.prefix.length) !== db.settings.prefix) {
         return;
