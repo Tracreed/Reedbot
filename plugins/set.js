@@ -16,7 +16,7 @@ commands.on('set', function(user, userID, channelID, message) {
                         message: `<@${userID}> Username set`
                     });
                 } else {
-                    db.settings.osu.users[userID] = {
+                    db.osu.users[userID] = {
                         "osu_name":args[3].toLowerCase()
                     };
                     bot.sendMessage({
@@ -45,7 +45,7 @@ commands.on('set', function(user, userID, channelID, message) {
             }
         }
     }
-    fs.writeFile("./db.json", JSON.stringify(db.settings, null, 4), 'utf8', function(error) {
+    fs.writeFile("./db.json", JSON.stringify(db, null, 4), 'utf8', function(error) {
         if (error) console.error(error);
     });
 });

@@ -12,20 +12,21 @@ commands.on('osu', function(user, userID, channelID, message, args) {
     if (args._.length && args._[0].length > 0) {
         osu_name = args._.join(' ').toLowerCase();
     }
-    else {
-        if (db.osu.users[userID]) {
-            osu_name = db.osu.users[userID].osu_name.toLowerCase();
-        }
-        else {
-            osu_name = user.toLowerCase();
+    else if (typeof(db.osu.users) === 'object') {
+        if (typeof(db.osu.users[userID]) === 'object') {
+            if (db.osu.users[userID].osu_name) {
+                osu_name = db.osu.users[userID].osu_name.toLowerCase();
+            } else {
+                osu_name = user.toLowerCase();
+            }
         }
     }
     if (args.m) {
         args.m = String(args.m);
         osu.setMode(args.m.replace(/taiko/i, '1').replace(/ctb|catchthebeat|fruits|catch|ceeteebee/i, '2').replace(/mania/i, '3').replace(/osu|standard|std/i, '0'));
     }
-    else {
-        if (db.osu.users[userID] && osu_name == user.toLowerCase() || db.osu.users[userID] && osu_name == db.osu.users[userID].osu_name.toLowerCase()) {
+    else if (typeof(db.osu.users) === 'object') {
+        if (typeof(db.osu.users[userID]) === 'object' && osu_name == user.toLowerCase() || typeof(db.osu.users[userID]) === 'object' && osu_name == db.osu.users[userID].osu_name.toLowerCase()) {
             if (db.osu.users[userID].mode) osu.setMode(db.osu.users[userID].mode);
         }
     }
@@ -35,7 +36,7 @@ commands.on('osu', function(user, userID, channelID, message, args) {
         if (data) {
             bot.sendMessage({
                 to: channelID,
-                message: `${data.username} (<https://osu.ppy.sh/u/${data.user_id}>)\n${String(osu.mode).replace('0', 'Osu').replace('1', 'Taiko').replace('2', 'CTB').replace('3', 'Mania')}\n${data.pp_raw}pp (#${data.pp_rank}, #${data.pp_country_rank} :flag_${data.country.toLowerCase()}:)\nLevel: ${data.level}\nAccuracy: ${parseFloat(data.accuracy).toFixed(2)}%\nProfile Picture: https://a.ppy.sh/${data.user_id}_0.jpg`
+                message: `${data.username} (<https://osu.ppy.sh/u/${data.user_id}>)\n${String(osu.mode).replace('0', 'Osu').replace('1', 'Taiko').replace('2', 'CTB').replace('3', 'Mania')}\n${data.pp_raw}pp (#${data.pp_rank}, #${data.pp_country_rank} :flag_${data.country.toLowerCase()}:)\nPlayCount: ${numeral(data.playcount).format('0,0')}\nRanked Score: ${numeral(data.ranked_score).format('0,0')}\nTotal Score: ${numeral(data.total_score).format('0,0')}\nLevel: ${data.level}\nAccuracy: ${parseFloat(data.accuracy).toFixed(2)}%\nProfile Picture: https://a.ppy.sh/${data.user_id}_0.jpg`
             });
         }
         else {
@@ -53,20 +54,21 @@ commands.on('osur', function(user, userID, channelID, message, args) {
     if (args._.length && args._[0].length > 0) {
         osu_name = args._.join(' ').toLowerCase();
     }
-    else {
-        if (db.osu.users[userID]) {
-            osu_name = db.osu.users[userID].osu_name.toLowerCase();
-        }
-        else {
-            osu_name = user.toLowerCase();
+    else if (typeof(db.osu.users) === 'object') {
+        if (typeof(db.osu.users[userID]) === 'object') {
+            if (db.osu.users[userID].osu_name) {
+                osu_name = db.osu.users[userID].osu_name.toLowerCase();
+            } else {
+                osu_name = user.toLowerCase();
+            }
         }
     }
     if (args.m) {
         args.m = String(args.m);
         osu.setMode(args.m.replace(/taiko/i, '1').replace(/ctb|catchthebeat|fruits|catch|ceeteebee/i, '2').replace(/mania/i, '3').replace(/osu|standard|std/i, '0'));
     }
-    else {
-        if (db.osu.users[userID] && osu_name == user.toLowerCase() || db.osu.users[userID] && osu_name == db.osu.users[userID].osu_name.toLowerCase()) {
+    else if (typeof(db.osu.users) === 'object') {
+        if (typeof(db.osu.users[userID]) === 'object' && osu_name == user.toLowerCase() || typeof(db.osu.users[userID]) === 'object' && osu_name == db.osu.users[userID].osu_name.toLowerCase()) {
             if (db.osu.users[userID].mode) osu.setMode(db.osu.users[userID].mode);
         }
     }
@@ -113,20 +115,21 @@ commands.on('osub', function(user, userID, channelID, message, args) {
     if (args._.length && args._[0].length > 0) {
         osu_name = args._.join(' ').toLowerCase();
     }
-    else {
-        if (db.osu.users[userID]) {
-            osu_name = db.osu.users[userID].osu_name.toLowerCase();
-        }
-        else {
-            osu_name = user.toLowerCase();
+    else if (typeof(db.osu.users) === 'object') {
+        if (typeof(db.osu.users[userID]) === 'object') {
+            if (db.osu.users[userID].osu_name) {
+                osu_name = db.osu.users[userID].osu_name.toLowerCase();
+            } else {
+                osu_name = user.toLowerCase();
+            }
         }
     }
     if (args.m) {
         args.m = String(args.m);
         osu.setMode(args.m.replace(/taiko/i, '1').replace(/ctb|catchthebeat|fruits|catch|ceeteebee/i, '2').replace(/mania/i, '3').replace(/osu|standard|std/i, '0'));
     }
-    else {
-        if (db.osu.users[userID] && osu_name == user.toLowerCase() || db.osu.users[userID] && osu_name == db.osu.users[userID].osu_name.toLowerCase()) {
+    else if (typeof(db.osu.users) === 'object') {
+        if (typeof(db.osu.users[userID]) === 'object' && osu_name == user.toLowerCase() || typeof(db.osu.users[userID]) === 'object' && osu_name == db.osu.users[userID].osu_name.toLowerCase()) {
             if (db.osu.users[userID].mode) osu.setMode(db.osu.users[userID].mode);
         }
     }
