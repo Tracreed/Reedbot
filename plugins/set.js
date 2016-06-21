@@ -9,14 +9,14 @@ commands.on('set', function(user, userID, channelID, message) {
     if (args[1] === "osu") {
         if (args[2] === "name") {
             if (args[3]) {
-                if (db.osu.users[userID]) {
-                    db.osu.users[userID].osu_name = args[3].toLowerCase();
+                if (db.osu[userID]) {
+                    db.osu[userID].osu_name = args[3].toLowerCase();
                     bot.sendMessage({
                         to: channelID,
                         message: `<@${userID}> Username set`
                     });
                 } else {
-                    db.osu.users[userID] = {
+                    db.osu[userID] = {
                         "osu_name":args[3].toLowerCase()
                     };
                     bot.sendMessage({
@@ -27,14 +27,14 @@ commands.on('set', function(user, userID, channelID, message) {
             }
         } else if (args[2] === "mode") {
             if (args[3]) {
-                if (db.osu.users[userID]) {
-                    db.osu.users[userID].mode = args[3].replace(/taiko/i, '1').replace(/ctb/i, '2').replace(/mania/i, '3').replace(/osu|standard|std/i, '0');
+                if (db.osu[userID]) {
+                    db.osu[userID].mode = args[3].replace(/taiko/i, '1').replace(/ctb/i, '2').replace(/mania/i, '3').replace(/osu|standard|std/i, '0');
                     bot.sendMessage({
                         to: channelID,
                         message: `<@${userID}> Mode set`
                     });
                 } else {
-                    db.osu.users[userID] = {
+                    db.osu[userID] = {
                         "mode":args[3].replace(/taiko/i, '1').replace(/ctb/i, '2').replace(/mania/i, '3').replace(/osu|standard|std/i, '0')
                     };
                     bot.sendMessage({
@@ -45,7 +45,4 @@ commands.on('set', function(user, userID, channelID, message) {
             }
         }
     }
-    fs.writeFile("./db.json", JSON.stringify(db, null, 4), 'utf8', function(error) {
-        if (error) console.error(error);
-    });
 });
