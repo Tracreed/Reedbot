@@ -2,7 +2,7 @@ var commands = require('../bot.js').commands;
 var bot = require('../bot.js').bot;
 var db = require('../bot.js').db;
 
-/*commands.on('', function roll(user, userID, channelID, message, args) {
+/*commands.on('', function (user, userID, channelID, message, args) {
 });*/
 
 commands.on('invite', function roll(user, userID, channelID, message, args) {
@@ -35,9 +35,30 @@ commands.on('clear', function roll(user, userID, channelID, message, args) {
     });
 });
 
-commands.on('lastmention', function roll(user, userID, channelID, message, args) {
+commands.on('lastmention', function lastmention(user, userID, channelID, message, args) {
     var messages = bot.getMessages({
         channel: channelID,
         limit: 5000
+    });
+});
+
+commands.on('help', function help(user, userID, channelID, message, args) {
+    bot.sendMessage({
+        to: userID,
+        messsage: `To add me to a server, use this link: ${bot.inviteURL}\n`
+    });
+});
+
+commands.on('info', function info(user, userID, channelID, message, args) {
+    bot.sendMessage({
+        to: channelID,
+        message: `${bot.username} is a bot made by Tracreed using node ${process.version} and discord.io\n`
+    });
+});
+
+commands.on('ping', function ping(user, userID, channelID, message, args) {
+    bot.sendMessage({
+        to: channelID,
+        message: `pong`
     });
 });

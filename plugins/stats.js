@@ -53,10 +53,10 @@ bot.on('message', function(user, userID, channelID, message, rawEvent) {
 commands.on('stats', function(user, userID, channelID, message, args) {
     var uptime = secToHours(process.uptime());
     var commandsString = "";
-    if (parsedCommands > 1) {
-        commandsString = `${parsedCommands} commands parsed and `;
-    } else if (parsedCommands === 1) {
-        commandsString = `${parsedCommands} command parsed and `;
+    if (parsedCommands + 1 > 1) {
+        commandsString = `${parsedCommands + 1} commands parsed and `;
+    } else if (parsedCommands + 1 === 1) {
+        commandsString = `${parsedCommands + 1} command parsed and `;
     }
     bot.sendMessage({
         to:channelID,

@@ -64,6 +64,7 @@ var servers = {};
 var mods = db.settings.mods;
 
 bot.on('ready', function() {
+	if (typeof(music.servers) !== 'object') music.servers = {};
 	Object.keys(music.servers).forEach(function(key) {
 		if (music.servers[key].channel && music.servers[key].autojoin) {
 			if (bot.servers[key]) {
