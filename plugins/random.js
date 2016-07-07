@@ -44,11 +44,15 @@ commands.on('lastmention', function lastmention(user, userID, channelID, message
 
 commands.on('help', function help(user, userID, channelID, message, args) {
     var commandNames = commands.eventNames();
+    if (db.settings.hidden_commands) {
+        var hiddenCommands = db.settings.hidden_commands;
+    } else {
+        var hiddenCommands = [];
+    }
     var commandList = '';
     for (var i = 0; i < commandNames.length; i++) {
-        if (db.settings.hidden_commands.indexOf(commandNames[i]) === -1) commandList += `${commandNames[i]}\n`;
+        if (hiddenCommands.indexOf(commandNames[i]) === -1) commandList += `${commandNames[i]}\n`;
     }
-    console.log(commandList);
     bot.sendMessage({
         to: userID,
         message: `To add me to your server, use this link: ${bot.inviteURL}\nCommands for ${bot.username}:\n\`\`\`${commandList}\`\`\``
