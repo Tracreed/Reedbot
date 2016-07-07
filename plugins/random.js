@@ -43,9 +43,15 @@ commands.on('lastmention', function lastmention(user, userID, channelID, message
 });
 
 commands.on('help', function help(user, userID, channelID, message, args) {
+    var commandNames = commands.eventNames();
+    var commandList = '';
+    for (var i = 0; i < commandNames.length; i++) {
+        if (db.settings.hidden_commands.indexOf(commandNames[i]) === -1) commandList += `${commandNames[i]}\n`;
+    }
+    console.log(commandList);
     bot.sendMessage({
         to: userID,
-        messsage: `To add me to a server, use this link: ${bot.inviteURL}\n`
+        message: `To add me to your server, use this link: ${bot.inviteURL}\nCommands for ${bot.username}:\n\`\`\`${commandList}\`\`\``
     });
 });
 
