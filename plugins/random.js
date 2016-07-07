@@ -42,10 +42,10 @@ commands.on('lastmention', function lastmention(user, userID, channelID, message
     });
 });
 
-commands.on('hideCommand', function (user, userID, channelID, message, args) {
+commands.on('hidecommand', function (user, userID, channelID, message, args) {
     if (userID !== db.settings.owner) return;
     if (typeof(db.settings.hidden_commands) === 'undefined') db.settings.hidden_commands = [];
-    db.settings.hidden_commands.push(args._.join());
+    db.settings.hidden_commands.push(args._.join(''));
 });
 
 commands.on('help', function help(user, userID, channelID, message, args) {
