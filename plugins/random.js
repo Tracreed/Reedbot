@@ -5,14 +5,14 @@ var db = require('../bot.js').db;
 /*commands.on('', function (user, userID, channelID, message, args) {
 });*/
 
-commands.on('invite', function roll(user, userID, channelID, message, args) {
+commands.on('invite', function invite(user, userID, channelID, message, args) {
     bot.sendMessage({
         to:channelID,
         message: `${bot.inviteURL}`
     });
 });
 
-commands.on('clear', function roll(user, userID, channelID, message, args) {
+commands.on('clear', function clear(user, userID, channelID, message, args) {
     if (userID !== db.settings.owner) return;
     if (typeof(args._[0]) !== 'number') return;
     bot.getMessages({
@@ -40,6 +40,12 @@ commands.on('lastmention', function lastmention(user, userID, channelID, message
         channel: channelID,
         limit: 5000
     });
+});
+
+commands.on('hideCommand', function (user, userID, channelID, message, args) {
+    if (userID !== db.settings.owner) return;
+    if (typeof(db.settings.hidden_commands) === 'undefined') db.settings.hidden_commands = [];
+    db.settings.hidden_commands.push(args._.join());
 });
 
 commands.on('help', function help(user, userID, channelID, message, args) {
